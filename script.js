@@ -285,27 +285,24 @@ const levels = [
   OaOOOOOOOmO
   OOrOjqkOrOO`,
   map`
-  ......................
-  ......................
-  ......i...............
-  ..........i...........
-  ......................
-  ..................i...
-  f...i.....i...........
-  .....................p
-  ..........i...........
-  ......................
-  ..........i...........
-  ..................i...
-  ......i...............
-  ..........i...........
-  ......................`,
+...........
+...........
+...........
+...........
+...........
+f.....i...p
+...........
+...........
+...........
+...........`,
   map`...`,
   map`...`,
 ];
 
 setSolids([Smug, player,])
 
+      
+      
 
 let level = 0;
 
@@ -343,4 +340,30 @@ onInput("d", () => {
 onInput("j", () => {
   level=1
   setMap(levels[level]);
+});
+
+afterInput(() => {
+  // count the number of tiles with goals
+  const targetNumber = tilesWith(jky).length;
+  
+  // count the number of tiles with goals and boxes
+  const numberCovered = tilesWith(jky, player).length;
+
+  // if the number of goals is the same as the number of goals covered
+  // all goals are covered and we can go to the next level
+  if (numberCovered === targetNumber) {
+    // increase the current level number
+    level = level + 1;
+
+    const currentLevel = levels[level];
+
+    // make sure the level exists and if so set the map
+    // otherwise, we have finished the last level, there is no level
+    // after the last level
+    if (currentLevel !== undefined) {
+      setMap(currentLevel);
+    } else {
+      addText("you win!", { y: 4, color: color`3` });
+    }
+  }
 });
