@@ -304,46 +304,43 @@ const levels = [
   map`...`,
 ];
 
+setSolids([Smug, player,])
+
+
 let level = 0;
 
 const currentLevel = levels[level];
 setMap(currentLevel);
 
 setPushables({
-  [player]: []
+  [player]: [jky]
 });
 
 onInput("s", () => {
   getFirst(player).y += 1;
-  checkNextLevel();
+   
   playTune(melody);
 });
 
 onInput("w", () => {
   getFirst(player).y -= 1;
-  checkNextLevel();
+   
   playTune(melody);
 });
 
 onInput("a", () => {
   getFirst(player).x -= 1;
-  checkNextLevel();
+   
   playTune(melody);
 });
 
 onInput("d", () => {
   getFirst(player).x += 1;
-  checkNextLevel();
+   
   playTune(melody);
 });
 
-function checkNextLevel() {
-  const playerTile = getTile(getFirst(player).x, getFirst(player).y);
-  if (playerTile.some(sprite => sprite.type === "jky")) {
-    if (level === 1) {
-      level = 2;  // Transition from level 1 to level 2
-      setMap(levels[level]);
-    }
-    // No level transition if not in level 1
-  }
-}
+onInput("j", () => {
+  level=1
+  setMap(levels[level]);
+});
