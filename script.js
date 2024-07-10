@@ -295,7 +295,12 @@ f.....i...p
 ...........
 ...........
 ...........`,
-  map`...`,
+  map`
+...i..........
+........i.....
+f......i.....p
+........i.....
+...i..........`,
   map`...`,
 ];
 
@@ -341,6 +346,30 @@ onInput("j", () => {
   level=1
   setMap(levels[level]);
 });
+
+
+
+
+
+function enemyspawn() {
+  const ran =Math.floor(Math.random() * (6 - 1) + 1);
+  console.log(ran)
+  addSprite(0,ran,Smug)
+}
+// input to reset level
+
+setInterval(function() {
+  // code to be executed repeatedly
+  // enemyspawn()
+ 
+  getAll(Smug).forEach((Smug) => {
+    Smug.x += 1
+  });
+ 
+  
+}, 1000);
+
+
 
 afterInput(() => {
   // count the number of tiles with goals
